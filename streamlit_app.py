@@ -13,7 +13,6 @@ st.write(
 )
 
 title = st.text_input("Name on smoothie", "")
-#st.write("The current movie title is", title)
 
 cnx = st.connection("snowflake")
 session = cnx.session()
@@ -41,10 +40,10 @@ if ingredients_list:
         ingredients_string+= " "
 
         search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit, 'SEARCH_ON'].iloc[0]
-        st.write('The search value for ', fruit,' is ', search_on, '.')
+        #st.write('The search value for ', fruit,' is ', search_on, '.')
 
         st.subheader(fruit + ' Nutrition information')
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit)
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + search_on)
         st_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
     save_smoothie = st.button('Submit smoothie order')
